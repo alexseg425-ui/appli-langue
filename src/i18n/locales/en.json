@@ -1,0 +1,85 @@
+{
+  "common": {
+    "appName": "Chispa",
+    "continue": "Continue",
+    "close": "Close",
+    "stay": "Stay",
+    "loading": "Loading…",
+    "signalProblem": "Report a problem",
+    "problemThanks": "Thanks! The problem has been noted."
+  },
+  "tabs": {
+    "path": "Path",
+    "settings": "Settings"
+  },
+  "languageInstruction": {
+    "fr": "French",
+    "en": "English"
+  },
+  "exercises": {
+    "translateTo": "Translate into {{language}}"
+  },
+  "onboarding": {
+    "welcomeTitle": "Welcome to Chispa!",
+    "interfaceTitle": "Which language do you want the app in?",
+    "interfaceDetected": "Detected on your phone",
+    "learnTitle": "Which language do you want to learn?",
+    "learnHint": "Explanations will follow the app language you chose.",
+    "sameLanguage": "A language can't be explained in itself: change the app language to choose this one.",
+    "alreadyLearned": "Already used for explanations",
+    "next": "Next",
+    "start": "Start"
+  },
+  "path": {
+    "title": "Your path",
+    "xp": "{{count}} XP",
+    "noCourse": "Choose a language to get started.",
+    "unit": "Unit {{number}}",
+    "chest": "End-of-unit chest",
+    "chestOpen": "Chest unlocked!",
+    "chestLocked": "Finish the whole unit to unlock it",
+    "lessonLocked": "Finish the previous lesson to unlock it",
+    "perfect": "Perfect",
+    "exercises": "{{count}} exercises"
+  },
+  "lesson": {
+    "notFound": "Lesson not found.",
+    "check": "Check",
+    "next": "Continue",
+    "end": "Finish",
+    "typeAnswer": "Type your answer",
+    "tapWords": "Tap the words in order",
+    "specialChars": "Special characters",
+    "quitTitle": "Quit the lesson?",
+    "quitBody": "The progress of this lesson will not be saved.",
+    "leave": "Quit",
+    "correct": "Well done!",
+    "almost": "Almost!",
+    "wrong": "Not quite",
+    "answerWas": "Correct answer: {{answer}}",
+    "comboReached": "Combo!",
+    "noHeartsTitle": "Out of hearts!",
+    "noHeartsBody": "Hearts come back over time.",
+    "nextHeartIn": "Next heart in {{time}}",
+    "backToPath": "Back to the path"
+  },
+  "results": {
+    "title": "Lesson complete!",
+    "xp": "+{{xp}} XP",
+    "perfect": "Perfect lesson!",
+    "mistakes": "Mistakes: {{count}}",
+    "mascot": "You're doing great!",
+    "continue": "Continue"
+  },
+  "settings": {
+    "title": "Settings",
+    "interfaceLanguage": "App language",
+    "interfaceHint": "Changes the texts, instructions and explanations. Your progress is kept.",
+    "theme": "Theme",
+    "themeSystem": "Automatic",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "alreadyLearned": "Already the language you learn",
+    "version": "Development build"
+  }
+}

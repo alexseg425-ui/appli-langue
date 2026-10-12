@@ -1,0 +1,20 @@
+[
+  {
+    "id": "lucia",
+    "name": "Lucía",
+    "age": 16,
+    "city": "Madrid",
+    "color": "#E4572E",
+    "role": { "fr": "Défis", "en": "Challenges" },
+    "personality": {
+      "fr": "Footballeuse compétitive, pleine d'énergie, qui ne lâche jamais rien.",
+      "en": "A competitive footballer, full of energy, who never gives up."
+    },
+    "phrases": [
+      {
+        "text": "¡Vamos, equipo!",
+        "translation": { "fr": "Allez, l'équipe !", "en": "Come on, team!" }
+      }
+    ]
+  }
+]

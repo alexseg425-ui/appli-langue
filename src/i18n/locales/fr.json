@@ -1,0 +1,85 @@
+{
+  "common": {
+    "appName": "Chispa",
+    "continue": "Continuer",
+    "close": "Fermer",
+    "stay": "Rester",
+    "loading": "Chargement…",
+    "signalProblem": "Signaler un problème",
+    "problemThanks": "Merci ! Le problème a bien été noté."
+  },
+  "tabs": {
+    "path": "Chemin",
+    "settings": "Réglages"
+  },
+  "languageInstruction": {
+    "fr": "le français",
+    "en": "l'anglais"
+  },
+  "exercises": {
+    "translateTo": "Traduis vers {{language}}"
+  },
+  "onboarding": {
+    "welcomeTitle": "Bienvenue dans Chispa !",
+    "interfaceTitle": "Dans quelle langue veux-tu voir l'app ?",
+    "interfaceDetected": "Détectée sur ton téléphone",
+    "learnTitle": "Quelle langue veux-tu apprendre ?",
+    "learnHint": "Les explications suivront la langue de l'interface que tu as choisie.",
+    "sameLanguage": "Une langue ne peut pas s'expliquer dans elle-même : change la langue de l'interface pour choisir celle-ci.",
+    "alreadyLearned": "Déjà choisie pour les explications",
+    "next": "Suivant",
+    "start": "Commencer"
+  },
+  "path": {
+    "title": "Ton chemin",
+    "xp": "{{count}} XP",
+    "noCourse": "Choisis une langue pour commencer.",
+    "unit": "Unité {{number}}",
+    "chest": "Coffre de fin d'unité",
+    "chestOpen": "Coffre débloqué !",
+    "chestLocked": "Termine toute l'unité pour le débloquer",
+    "lessonLocked": "Termine la leçon précédente pour la débloquer",
+    "perfect": "Parfaite",
+    "exercises": "{{count}} exercices"
+  },
+  "lesson": {
+    "notFound": "Leçon introuvable.",
+    "check": "Vérifier",
+    "next": "Continuer",
+    "end": "Terminer",
+    "typeAnswer": "Écris ta réponse",
+    "tapWords": "Touche les mots dans l'ordre",
+    "specialChars": "Caractères spéciaux",
+    "quitTitle": "Quitter la leçon ?",
+    "quitBody": "La progression de cette leçon ne sera pas enregistrée.",
+    "leave": "Quitter",
+    "correct": "Bravo !",
+    "almost": "Presque !",
+    "wrong": "Pas tout à fait",
+    "answerWas": "Bonne réponse : {{answer}}",
+    "comboReached": "Combo !",
+    "noHeartsTitle": "Plus de cœurs !",
+    "noHeartsBody": "Les cœurs reviennent avec le temps.",
+    "nextHeartIn": "Prochain cœur dans {{time}}",
+    "backToPath": "Retour au chemin"
+  },
+  "results": {
+    "title": "Leçon terminée !",
+    "xp": "+{{xp}} XP",
+    "perfect": "Leçon parfaite !",
+    "mistakes": "Erreurs : {{count}}",
+    "mascot": "Tu progresses super bien !",
+    "continue": "Continuer"
+  },
+  "settings": {
+    "title": "Réglages",
+    "interfaceLanguage": "Langue de l'interface",
+    "interfaceHint": "Change les textes, consignes et explications. Ta progression est conservée.",
+    "theme": "Thème",
+    "themeSystem": "Automatique",
+    "themeLight": "Clair",
+    "themeDark": "Sombre",
+    "alreadyLearned": "Déjà langue apprise",
+    "version": "Version de développement"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "code": "es",
+  "name": { "fr": "Espagnol", "en": "Spanish" },
+  "instructionName": { "fr": "l'espagnol", "en": "Spanish" },
+  "nativeName": "Español",
+  "flag": "🇪🇸",
+  "accent": "#E4572E",
+  "writingSystem": "latin",
+  "ttsVoice": "es-ES",
+  "specialChars": ["á", "é", "í", "ó", "ú", "ñ", "ü", "¿", "¡"],
+  "correction": {
+    "ignoreCase": true,
+    "ignorePunctuation": true,
+    "accentsOptional": true,
+    "typoTolerance": 1
+  },
+  "levels": [
+    { "cefr": "A1", "label": { "fr": "Débutant", "en": "Beginner" } },
+    { "cefr": "A2", "label": { "fr": "Élémentaire", "en": "Elementary" } },
+    { "cefr": "B1", "label": { "fr": "Intermédiaire", "en": "Intermediate" } },
+    { "cefr": "B2", "label": { "fr": "Intermédiaire avancé", "en": "Upper intermediate" } }
+  ],
+  "comboPhrases": ["¡Olé!", "¡Qué bien!", "¡Imparable!"]
+}

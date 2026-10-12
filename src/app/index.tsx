@@ -1,20 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+// Point d'entrée : onboarding au premier lancement, puis le chemin.
+import { Redirect } from 'expo-router';
+import { useUserStore } from '../store/userStore';
 
-// Écran provisoire de l'étape 1.1 : prouve que l'app se lance.
-export default function Home() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello Chispa 🦎</Text>
-    </View>
-  );
+export default function Index() {
+  const onboardingDone = useUserStore((state) => state.onboardingDone);
+  return <Redirect href={onboardingDone ? '/(tabs)/path' : '/onboarding/interface-language'} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF7EC',
-  },
-  title: { fontSize: 28, fontWeight: '800', color: '#3B2A1A' },
-});

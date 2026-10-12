@@ -1,0 +1,19 @@
+{
+  "unitId": "es-u1",
+  "tips": [
+    {
+      "title": { "fr": "Les questions en espagnol", "en": "Questions in Spanish" },
+      "body": {
+        "fr": "En espagnol, une question commence par un point d'interrogation renversé ¿ et finit par ?. Pour une exclamation, c'est pareil avec ¡ et !.",
+        "en": "Spanish questions start with an upside-down question mark ¿ and end with ?. Exclamations work the same way with ¡ and !."
+      }
+    },
+    {
+      "title": { "fr": "Ser ou estar ?", "en": "Ser or estar?" },
+      "body": {
+        "fr": "Pour dire qui on est ou d'où l'on vient, on utilise « ser » (soy, eres…). Pour dire comment on va, on utilise « estar » (estoy, estás…).",
+        "en": "To say who you are or where you come from, use « ser » (soy, eres…). To say how you feel, use « estar » (estoy, estás…)."
+      }
+    }
+  ]
+}
