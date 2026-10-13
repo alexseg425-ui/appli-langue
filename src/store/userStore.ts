@@ -13,6 +13,8 @@ interface UserState {
   learningLanguages: string[];
   activeLanguage: string | null; // langue apprise affichée sur le chemin
   onboardingDone: boolean;
+  soundEnabled: boolean;
+  setSoundEnabled: (enabled: boolean) => void;
   setInterfaceLanguage: (code: InterfaceLanguageCode) => void;
   setThemePreference: (preference: ThemePreference) => void;
   setActiveLanguage: (code: string) => void;
@@ -27,6 +29,8 @@ export const useUserStore = create<UserState>()(
       learningLanguages: [],
       activeLanguage: null,
       onboardingDone: false,
+      soundEnabled: true,
+      setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
       setInterfaceLanguage: (code) => set({ interfaceLanguage: code }),
       setThemePreference: (preference) => set({ themePreference: preference }),
       setActiveLanguage: (code) => set({ activeLanguage: code }),

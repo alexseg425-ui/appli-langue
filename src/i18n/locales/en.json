@@ -80,6 +80,8 @@
     "themeLight": "Light",
     "themeDark": "Dark",
     "alreadyLearned": "Already the language you learn",
-    "version": "Development build"
+    "version": "Development build",
+    "sounds": "Sound effects",
+    "soundsHint": "Sounds for correct answers, mistakes and the end of a lesson."
   }
 }

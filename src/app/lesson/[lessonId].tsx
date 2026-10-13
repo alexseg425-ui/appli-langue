@@ -2,6 +2,7 @@
 import * as Haptics from 'expo-haptics';
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, { ZoomIn } from 'react-native-reanimated';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { correctAnswerText, evaluateAnswer } from '../../engine/exercises/evaluate';
@@ -18,6 +19,7 @@ import {
   recordVerdict,
 } from '../../engine/lesson/lessonRunner';
 import { resolveInterfaceLanguage } from '../../i18n/detect';
+import { playSound } from '../../audio/sounds';
 import { getPlugin, getUiPlugin } from '../../languages';
 import { useProgressStore } from '../../store/progressStore';
 import { useUserStore } from '../../store/userStore';
@@ -57,6 +59,10 @@ export default function LessonScreen() {
 
   // Plus de cœurs : on ouvre la fenêtre d'attente. Elle se ferme dès qu'un cœur revient.
   const noHearts = hearts === 0;
+  // Plus de cœurs : un son triste annonce la fenêtre d'attente.
+  useEffect(() => {
+    if (noHearts) playSound('heartLost');
+  }, [noHearts]);
   useEffect(() => {
     if (!noHearts) return;
     const id = setInterval(() => {
@@ -107,7 +113,11 @@ export default function LessonScreen() {
         : Haptics.NotificationFeedbackType.Success,
     );
     if (result === 'wrong') loseHeartNow();
-    setState(recordVerdict(state, result));
+    const next = recordVerdict(state, result);
+    // Le combo a sa propre musique ; sinon on joue le son de la réponse.
+    if (next.comboJustReached) playSound('combo');
+    else playSound(result === 'correct' ? 'correct' : result === 'almost' ? 'almost' : 'wrong');
+    setState(next);
   };
 
   // Question suivante, ou fin de leçon.
@@ -119,6 +129,7 @@ export default function LessonScreen() {
       return;
     }
     const result = lessonResult(next);
+    playSound('complete');
     completeLesson(activeLanguage, found.lesson.id, result.perfect, result.xp);
     router.replace({
       pathname: '/lesson/results',
@@ -168,9 +179,12 @@ export default function LessonScreen() {
 
       <View style={styles.footer}>
         {state.comboJustReached ? (
-          <Text style={[styles.combo, { color: colors.accent }]}>
+          <Animated.Text
+            entering={ZoomIn.springify()}
+            style={[styles.combo, { color: colors.accent }]}
+          >
             {t('lesson.comboReached')} {comboPhrase}
-          </Text>
+          </Animated.Text>
         ) : null}
 
         {verdict && exercise ? (

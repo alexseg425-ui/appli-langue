@@ -1,8 +1,17 @@
 // Écran d'accueil : le chemin vertical des unités et des leçons.
 import { useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import { playSound } from '../../audio/sounds';
 import { getLanguageContent } from '../../engine/content/registry';
 import { buildPath, PathLesson, PathUnit, unitTitle } from '../../engine/path/pathBuilder';
 import { resolveInterfaceLanguage } from '../../i18n/detect';
@@ -42,16 +51,25 @@ export default function PathScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.header}>
-          <Chispa size={56} />
+        <LinearGradient
+          colors={[colors.accent, colors.accentShadow]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.hero}
+        >
+          <View style={styles.mascotBubble}>
+            <Chispa size={52} />
+          </View>
           <View style={{ flex: 1 }}>
-            <Text style={[styles.title, { color: colors.text }]}>{t('path.title')}</Text>
-            <Text style={{ color: colors.textMuted, fontWeight: '700' }}>
+            <Text style={[styles.heroTitle, { color: colors.onColor }]}>{t('path.title')}</Text>
+            <Text style={[styles.heroXp, { color: colors.onColor }]}>
               {t('path.xp', { count: totalXp })}
             </Text>
           </View>
-          <Hearts count={hearts} />
-        </View>
+          <View style={styles.heartPill}>
+            <Hearts count={hearts} />
+          </View>
+        </LinearGradient>
 
         <View style={styles.switcher}>
           {learningLanguages.map((code) => {
@@ -63,7 +81,10 @@ export default function PathScreen() {
                 key={code}
                 accessibilityRole="button"
                 accessibilityState={{ selected }}
-                onPress={() => setActiveLanguage(code)}
+                onPress={() => {
+                  playSound('tap');
+                  setActiveLanguage(code);
+                }}
                 style={[
                   styles.chip,
                   {
@@ -144,6 +165,24 @@ function UnitBlock({
   );
 }
 
+// Fait "respirer" la leçon qu'on doit faire maintenant (elle attire l'œil).
+function usePulse(active: boolean) {
+  const scale = useSharedValue(1);
+
+  useEffect(() => {
+    if (!active) {
+      scale.value = 1;
+      return;
+    }
+    scale.value = withRepeat(
+      withSequence(withTiming(1.08, { duration: 650 }), withTiming(1, { duration: 650 })),
+      -1,
+    );
+  }, [active, scale]);
+
+  return useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
+}
+
 // Un rond par leçon, décalé à gauche / à droite pour former un chemin en zigzag.
 function LessonNode({
   lesson,
@@ -158,30 +197,36 @@ function LessonNode({
   const { colors } = useTheme();
   const locked = lesson.status === 'locked';
   const done = lesson.status === 'completed';
-  const background = locked ? colors.locked : done ? colors.correct : colors.accent;
+  const pulse = usePulse(lesson.status === 'available');
   const shifted = index % 2 === 1;
+  const gradient: [string, string] = done
+    ? [colors.correct, '#1D8A4E']
+    : [colors.accent, colors.accentShadow];
 
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityState={{ disabled: locked }}
       accessibilityHint={locked ? t('path.lessonLocked') : undefined}
-      accessibilityLabel={`${pickLabel(lesson, i18n.language)}`}
+      accessibilityLabel={pickLabel(lesson, i18n.language)}
       disabled={locked}
-      onPress={onPress}
+      onPress={() => {
+        playSound('tap');
+        onPress();
+      }}
       style={[styles.nodeRow, { marginLeft: shifted ? 56 : 0, marginRight: shifted ? 0 : 56 }]}
     >
-      <View
-        style={[
-          styles.node,
-          {
-            backgroundColor: background,
-            borderBottomColor: locked ? colors.border : 'rgba(0,0,0,0.25)',
-          },
-        ]}
-      >
-        <Text style={styles.nodeIcon}>{locked ? '🔒' : done ? '✓' : '▶'}</Text>
-      </View>
+      <Animated.View style={pulse}>
+        {locked ? (
+          <View style={[styles.node, { backgroundColor: colors.locked }]}>
+            <Text style={styles.nodeIcon}>🔒</Text>
+          </View>
+        ) : (
+          <LinearGradient colors={gradient} style={styles.node}>
+            <Text style={styles.nodeIcon}>{done ? '✓' : '▶'}</Text>
+          </LinearGradient>
+        )}
+      </Animated.View>
       <View style={{ flex: 1, paddingLeft: 12 }}>
         <Text style={{ color: colors.text, fontWeight: '700' }}>
           {pickLabel(lesson, i18n.language)}
@@ -203,8 +248,22 @@ function pickLabel(lesson: PathLesson, lang: string): string {
 
 const styles = StyleSheet.create({
   content: { padding: 16, gap: 16, paddingBottom: 40 },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  title: { fontSize: 24, fontWeight: '800' },
+  hero: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    padding: 16,
+    borderRadius: 26,
+  },
+  mascotBubble: { backgroundColor: '#FFFFFF', borderRadius: 40, padding: 4 },
+  heroTitle: { fontSize: 22, fontWeight: '800' },
+  heroXp: { fontSize: 15, fontWeight: '700', opacity: 0.9 },
+  heartPill: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
   switcher: { flexDirection: 'row', gap: 10, flexWrap: 'wrap' },
   chip: {
     flexDirection: 'row',
@@ -225,6 +284,7 @@ const styles = StyleSheet.create({
     height: 72,
     borderRadius: 36,
     borderBottomWidth: 6,
+    borderBottomColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },

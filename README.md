@@ -23,6 +23,7 @@ Application d'apprentissage des langues multilingue, avec un Espace École (à v
 | `npm run typecheck` | Vérifie les types TypeScript |
 | `npm run lint` | Repère les erreurs de style et de code |
 | `npm run check` | Tout ce qui précède, d'un coup |
+| `npm run sounds:generate` | Recrée les effets sonores (`assets/sounds/`) à partir de `src/audio/synth.ts` |
 
 ## Organisation du code
 
@@ -31,7 +32,8 @@ Application d'apprentissage des langues multilingue, avec un Espace École (à v
 - `src/languages/` : les **plugins de langue** (règles de correction, accents).
 - `src/i18n/` : les **traductions de l'interface** (`locales/fr.json`, `locales/en.json`).
 - `src/store/` : la **mémoire** de l'app (réglages et progression, sauvegardés sur le téléphone).
-- `src/ui/` : le **design** (couleurs, boutons, composants, exercices).
+- `src/ui/` : le **design** (couleurs, boutons, composants, exercices, animations).
+- `src/audio/` : les **effets sonores** (synthétisés dans le code, réglables dans Réglages).
 - `content/<langue>/` : le **contenu** d'une langue (config, unités, astuces, personnages).
 
 ## Ajouter une langue
@@ -42,4 +44,5 @@ Application d'apprentissage des langues multilingue, avec un Espace École (à v
 
 ## Où en est le projet
 
-- Phase 1 : chemin, leçons, 3 types d'exercices, cœurs, XP, combo, résultats, onboarding, réglages (langue d'interface et thème), unité 1 d'espagnol.
+- Phase 1 : chemin, leçons, 3 types d'exercices, cœurs, XP, combo, résultats, onboarding, réglages (langue d'interface, thème, sons), unité 1 d'espagnol.
+- Ajout : effets sonores et animations (boutons, mascotte, progression, résultats).

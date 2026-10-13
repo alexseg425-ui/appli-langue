@@ -80,6 +80,8 @@
     "themeLight": "Clair",
     "themeDark": "Sombre",
     "alreadyLearned": "Déjà langue apprise",
-    "version": "Version de développement"
+    "version": "Version de développement",
+    "sounds": "Effets sonores",
+    "soundsHint": "Sons de bonne réponse, d'erreur et de fin de leçon."
   }
 }

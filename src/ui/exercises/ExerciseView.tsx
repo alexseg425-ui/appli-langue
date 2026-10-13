@@ -8,6 +8,7 @@ import { pickText } from '../../engine/content/localized';
 import type { LanguagePlugin, Verdict } from '../../languages/types';
 import { UI_SPECIAL_CHARS } from '../../languages';
 import { shuffle } from '../../utils/shuffle';
+import { playSound } from '../../audio/sounds';
 import { useTheme } from '../theme/useTheme';
 
 interface Props {
@@ -59,6 +60,7 @@ function TilesExercise({
 
   const toggle = (index: number) => {
     if (disabled) return;
+    playSound('tap');
     const next = picked.includes(index)
       ? picked.filter((item) => item !== index)
       : [...picked, index];
@@ -225,7 +227,10 @@ function ImageExercise({
               accessibilityRole="button"
               accessibilityState={{ selected }}
               disabled={disabled}
-              onPress={() => onChange(option.id)}
+              onPress={() => {
+                playSound('tap');
+                onChange(option.id);
+              }}
               style={[styles.card, { backgroundColor: colors.surface, borderColor }]}
             >
               <Text style={styles.emoji}>{option.emoji}</Text>

@@ -1,5 +1,8 @@
-// Gros bouton "3D" : une ombre en bas qui s'enfonce quand on appuie dessus.
+// Gros bouton "3D" : une ombre en bas qui s'enfonce et un léger rebond à l'appui.
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, ViewStyle } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import { playSound } from '../../audio/sounds';
 import { useTheme } from '../theme/useTheme';
 
 type Variant = 'primary' | 'correct' | 'secondary';
@@ -14,6 +17,13 @@ interface Props {
 
 export function Button3D({ label, onPress, variant = 'primary', disabled, style }: Props) {
   const { colors } = useTheme();
+  const [isPressed, setIsPressed] = useState(false);
+  const scale = useSharedValue(1);
+  // Le ressort se déclenche ici (et non dans le toucher) : le bouton rebondit à chaque appui.
+  useEffect(() => {
+    scale.value = withSpring(isPressed ? 0.96 : 1, { damping: 12, stiffness: 280 });
+  }, [isPressed, scale]);
+  const pressStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
   const look = {
     primary: { background: colors.accent, shadow: colors.accentShadow, text: colors.onColor },
@@ -21,26 +31,35 @@ export function Button3D({ label, onPress, variant = 'primary', disabled, style 
     secondary: { background: colors.surface, shadow: colors.border, text: colors.text },
   }[variant];
 
+  const handlePress = () => {
+    if (disabled) return;
+    playSound('tap');
+    onPress();
+  };
+
   return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      accessibilityState={{ disabled: !!disabled }}
-      onPress={onPress}
-      disabled={disabled}
-      style={({ pressed }) => [
-        styles.base,
-        {
-          backgroundColor: disabled ? colors.locked : look.background,
-          borderBottomColor: disabled ? colors.locked : look.shadow,
-          borderBottomWidth: pressed ? 2 : 6,
-          marginTop: pressed ? 4 : 0,
-        },
-        style,
-      ]}
-    >
-      <Text style={[styles.label, { color: look.text }]}>{label}</Text>
-    </Pressable>
+    <Animated.View style={[pressStyle, style]}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={label}
+        accessibilityState={{ disabled: !!disabled }}
+        onPress={handlePress}
+        onPressIn={() => setIsPressed(true)}
+        onPressOut={() => setIsPressed(false)}
+        disabled={disabled}
+        style={({ pressed }) => [
+          styles.base,
+          {
+            backgroundColor: disabled ? colors.locked : look.background,
+            borderBottomColor: disabled ? colors.locked : look.shadow,
+            borderBottomWidth: pressed ? 2 : 6,
+            marginTop: pressed ? 4 : 0,
+          },
+        ]}
+      >
+        <Text style={[styles.label, { color: look.text }]}>{label}</Text>
+      </Pressable>
+    </Animated.View>
   );
 }
 

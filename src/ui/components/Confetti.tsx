@@ -22,9 +22,11 @@ function Piece({ index }: { index: number }) {
     );
   }, [index, progress]);
 
+  // Chaque confetti tombe à une hauteur différente, puis disparaît à la fin de sa chute.
+  const fall = 420 + ((index * 97) % 320);
   const style = useAnimatedStyle(() => ({
-    transform: [{ translateY: progress.value * 650 }, { rotate: `${progress.value * 540}deg` }],
-    opacity: 1 - progress.value * 0.5,
+    transform: [{ translateY: progress.value * fall }, { rotate: `${progress.value * 540}deg` }],
+    opacity: progress.value < 0.85 ? 1 : (1 - progress.value) / 0.15,
   }));
 
   return (

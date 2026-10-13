@@ -9,7 +9,9 @@ import path from 'node:path';
 
 const [distArg, outArg] = process.argv.slice(2);
 if (!distArg || !outArg) {
-  console.error('Usage : npx tsx scripts/build-web-single.ts <dossier-du-build> <fichier-de-sortie.html>');
+  console.error(
+    'Usage : npx tsx scripts/build-web-single.ts <dossier-du-build> <fichier-de-sortie.html>',
+  );
   process.exit(1);
 }
 
@@ -18,7 +20,7 @@ let html = fs.readFileSync(path.join(dist, 'index.html'), 'utf8');
 
 // 1. Le script principal de l'app (un seul fichier, sans morceaux à charger à part).
 const scriptTag = html.match(/<script src="(\/_expo\/static\/js\/web\/[^"]+\.js)"[^>]*><\/script>/);
-if (!scriptTag) throw new Error('Script de l\'app introuvable dans index.html');
+if (!scriptTag) throw new Error("Script de l'app introuvable dans index.html");
 
 let code = fs.readFileSync(path.join(dist, scriptTag[1]!), 'utf8');
 // Un "</script>" dans le code couperait la page : on le neutralise.
@@ -35,16 +37,23 @@ const pathFix = `<script>(function(){try{if(location.pathname!=='/'){history.rep
 // 4. Titre court et fond de couleur crème dès le chargement (pas d'écran blanc).
 html = html
   .replace(/<title>[^<]*<\/title>/, '<title>Chispa, app de langues</title>')
-  .replace('</head>', `<style>html,body,#root{box-sizing:border-box}body{background:#FFF7EC;color-scheme:light dark}</style>${pathFix}\n</head>`);
-
+  .replace(
+    '</head>',
+    `<style>html,body,#root{box-sizing:border-box}body{background:#FFF7EC;color-scheme:light dark}</style>${pathFix}\n</head>`,
+  );
 
 // 5. Fragment : on retire l'enveloppe du document (la publication l'ajoute).
 const headInner = html.match(/<head>([\s\S]*)<\/head>/)?.[1] ?? '';
 const bodyInner = html.match(/<body>([\s\S]*)<\/body>/)?.[1] ?? '';
-const cleanedHead = headInner.replace(/<meta charset[^>]*>|<meta httpEquiv[^>]*>|<meta name="viewport"[^>]*>/g, '');
+const cleanedHead = headInner.replace(
+  /<meta charset[^>]*>|<meta httpEquiv[^>]*>|<meta name="viewport"[^>]*>/g,
+  '',
+);
 html = `${cleanedHead.trim()}\n${bodyInner.trim()}\n`;
 
 const output = path.resolve(outArg);
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, html);
-console.log(`Page unique écrite : ${output} (${(fs.statSync(output).size / 1024 / 1024).toFixed(2)} Mo)`);
+console.log(
+  `Page unique écrite : ${output} (${(fs.statSync(output).size / 1024 / 1024).toFixed(2)} Mo)`,
+);

@@ -1,5 +1,5 @@
 // Réglages : langue de l'interface (changement immédiat) et thème.
-import { ScrollView, StyleSheet, Pressable, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Pressable, Switch, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { canPair } from '../../engine/languagePair';
 import { resolveInterfaceLanguage } from '../../i18n/detect';
@@ -18,6 +18,8 @@ export default function SettingsScreen() {
 
   const activeLanguage = useUserStore((state) => state.activeLanguage);
   const setInterfaceLanguage = useUserStore((state) => state.setInterfaceLanguage);
+  const soundEnabled = useUserStore((state) => state.soundEnabled);
+  const setSoundEnabled = useUserStore((state) => state.setSoundEnabled);
   const themePreference = useUserStore((state) => state.themePreference);
   const setThemePreference = useUserStore((state) => state.setThemePreference);
 
@@ -53,6 +55,24 @@ export default function SettingsScreen() {
             options={languageOptions}
             selected={currentLanguage}
             onSelect={(code) => setInterfaceLanguage(code as InterfaceLanguageCode)}
+          />
+        </View>
+
+        <View
+          style={[styles.soundRow, { backgroundColor: colors.surface, borderColor: colors.border }]}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.sectionTitle, { color: colors.text }]}>
+              {t('settings.sounds')}
+            </Text>
+            <Text style={{ color: colors.textMuted }}>{t('settings.soundsHint')}</Text>
+          </View>
+          <Switch
+            value={soundEnabled}
+            onValueChange={setSoundEnabled}
+            trackColor={{ false: colors.border, true: colors.accent }}
+            thumbColor={colors.onColor}
+            accessibilityLabel={t('settings.sounds')}
           />
         </View>
 
@@ -99,6 +119,14 @@ const styles = StyleSheet.create({
   title: { fontSize: 26, fontWeight: '800' },
   section: { gap: 10 },
   sectionTitle: { fontSize: 18, fontWeight: '800' },
+  soundRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 16,
+    borderRadius: 18,
+    borderWidth: 1,
+  },
   segmented: { flexDirection: 'row', gap: 8 },
   segment: { flex: 1, alignItems: 'center', paddingVertical: 12, borderRadius: 14, borderWidth: 2 },
 });

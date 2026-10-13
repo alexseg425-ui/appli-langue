@@ -4,6 +4,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import i18next, { detectDeviceLanguage } from '../i18n';
+import { initAudio } from '../audio/sounds';
 import { useStoresReady } from '../store/useStoresReady';
 import { useUserStore } from '../store/userStore';
 import { useTheme } from '../ui/theme/useTheme';
@@ -15,6 +16,10 @@ export default function RootLayout() {
 
   // Dès que la langue de l'interface change (réglages ou onboarding), tous les textes changent.
   // Pas besoin de redémarrer l'app : react-i18next met à jour les écrans tout seul.
+  useEffect(() => {
+    if (ready) void initAudio();
+  }, [ready]);
+
   useEffect(() => {
     if (!ready) return;
     void i18next.changeLanguage(interfaceLanguage ?? detectDeviceLanguage());
