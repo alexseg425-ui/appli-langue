@@ -2,90 +2,672 @@
   "id": "es-u1",
   "order": 1,
   "cefr": "A1",
-  "title": { "fr": "Saludos y presentaciones", "en": "Greetings and introductions" },
+  "title": {
+    "fr": "Saludos y presentaciones",
+    "en": "Greetings and introductions"
+  },
   "description": {
     "fr": "Se saluer, se présenter et parler de soi.",
     "en": "Greet people, introduce yourself and talk about yourself."
   },
+  "showSpecialChars": false,
   "lessons": [
     {
       "id": "es-u1-l1",
-      "title": { "fr": "Bonjour et au revoir", "en": "Hello and goodbye" },
+      "title": {
+        "fr": "Bonjour et au revoir",
+        "en": "Hello and goodbye"
+      },
       "exercises": [
-        { "id": "es-u1-l1-e1", "type": "translate_to_target", "source": { "fr": "Bonjour", "en": "Hello" }, "answers": ["Hola"], "distractors": ["adiós", "gracias"] },
-        { "id": "es-u1-l1-e2", "type": "translate_to_source", "source": "Buenos días", "answers": { "fr": ["Bonjour", "Bonjour (le matin)"], "en": ["Good morning"] } },
-        { "id": "es-u1-l1-e3", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « buenas noches » ?", "en": "Which picture matches « buenas noches »?" }, "options": [{ "id": "a", "emoji": "🌙" }, { "id": "b", "emoji": "🌅" }, { "id": "c", "emoji": "☕" }], "answer": "a" },
-        { "id": "es-u1-l1-e4", "type": "translate_to_target", "source": { "fr": "Au revoir", "en": "Goodbye" }, "answers": ["Adiós"], "distractors": ["hola", "días"] },
-        { "id": "es-u1-l1-e5", "type": "translate_to_source", "source": "¡Hola!", "answers": { "fr": ["Salut !", "Bonjour !"], "en": ["Hi!", "Hello!"] } },
-        { "id": "es-u1-l1-e6", "type": "translate_to_target", "source": { "fr": "Bonne nuit", "en": "Good night" }, "answers": ["Buenas noches"], "distractors": ["buenos", "adiós"] },
-        { "id": "es-u1-l1-e7", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « adiós » ?", "en": "Which picture matches « adiós »?" }, "options": [{ "id": "a", "emoji": "👋" }, { "id": "b", "emoji": "🚪" }, { "id": "c", "emoji": "🍽️" }], "answer": "a" },
-        { "id": "es-u1-l1-e8", "type": "translate_to_source", "source": "¡Hasta luego!", "answers": { "fr": ["À bientôt !", "À plus tard !"], "en": ["See you later!"] } },
-        { "id": "es-u1-l1-e9", "type": "translate_to_target", "source": { "fr": "Bonsoir", "en": "Good evening" }, "answers": ["Buenas tardes"], "distractors": ["buenos", "adiós"] },
-        { "id": "es-u1-l1-e10", "type": "translate_to_source", "source": "¿Qué tal?", "answers": { "fr": ["Comment ça va ?", "Ça va ?"], "en": ["How are you?", "How's it going?"] } }
+        {
+          "id": "es-u1-l1-e1",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Bonjour",
+            "en": "Hello"
+          },
+          "answers": ["Hola"],
+          "distractors": ["adiós", "gracias"]
+        },
+        {
+          "id": "es-u1-l1-e2",
+          "type": "translate_to_source",
+          "source": "Buenos días",
+          "answers": {
+            "fr": ["Bonjour", "Bonjour (le matin)"],
+            "en": ["Good morning"]
+          }
+        },
+        {
+          "id": "es-u1-l1-e3",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « buenas noches » ?",
+            "en": "Which picture matches « buenas noches »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "🌙"
+            },
+            {
+              "id": "b",
+              "emoji": "🌅"
+            },
+            {
+              "id": "c",
+              "emoji": "☕"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l1-e4",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Au revoir",
+            "en": "Goodbye"
+          },
+          "answers": ["Adiós"],
+          "distractors": ["hola", "días"]
+        },
+        {
+          "id": "es-u1-l1-e5",
+          "type": "translate_to_source",
+          "source": "¡Hola!",
+          "answers": {
+            "fr": ["Salut !", "Bonjour !"],
+            "en": ["Hi!", "Hello!"]
+          }
+        },
+        {
+          "id": "es-u1-l1-e6",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Bonne nuit",
+            "en": "Good night"
+          },
+          "answers": ["Buenas noches"],
+          "distractors": ["buenos", "adiós"]
+        },
+        {
+          "id": "es-u1-l1-e7",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « adiós » ?",
+            "en": "Which picture matches « adiós »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "👋"
+            },
+            {
+              "id": "b",
+              "emoji": "🚪"
+            },
+            {
+              "id": "c",
+              "emoji": "🍽️"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l1-e8",
+          "type": "translate_to_source",
+          "source": "¡Hasta luego!",
+          "answers": {
+            "fr": ["À bientôt !", "À plus tard !"],
+            "en": ["See you later!"]
+          }
+        },
+        {
+          "id": "es-u1-l1-e9",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Bonsoir",
+            "en": "Good evening"
+          },
+          "answers": ["Buenas tardes"],
+          "distractors": ["buenos", "adiós"]
+        },
+        {
+          "id": "es-u1-l1-e10",
+          "type": "translate_to_source",
+          "source": "¿Qué tal?",
+          "answers": {
+            "fr": ["Comment ça va ?", "Ça va ?"],
+            "en": ["How are you?", "How's it going?"]
+          }
+        }
       ]
     },
     {
       "id": "es-u1-l2",
-      "title": { "fr": "Je m'appelle…", "en": "My name is…" },
+      "title": {
+        "fr": "Je m'appelle…",
+        "en": "My name is…"
+      },
       "exercises": [
-        { "id": "es-u1-l2-e1", "type": "translate_to_target", "source": { "fr": "Je m'appelle Lucía", "en": "My name is Lucía" }, "answers": ["Me llamo Lucía"], "distractors": ["soy", "estás"] },
-        { "id": "es-u1-l2-e2", "type": "translate_to_source", "source": "¿Cómo te llamas?", "answers": { "fr": ["Comment tu t'appelles ?", "Tu t'appelles comment ?"], "en": ["What is your name?", "What's your name?"] } },
-        { "id": "es-u1-l2-e3", "type": "translate_to_target", "source": { "fr": "Je m'appelle Mateo", "en": "My name is Mateo" }, "answers": ["Me llamo Mateo"], "distractors": ["adiós"] },
-        { "id": "es-u1-l2-e4", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « el gato » ?", "en": "Which picture matches « el gato »?" }, "options": [{ "id": "a", "emoji": "🐱" }, { "id": "b", "emoji": "🐶" }, { "id": "c", "emoji": "🐟" }], "answer": "a" },
-        { "id": "es-u1-l2-e5", "type": "translate_to_target", "source": { "fr": "Comment tu t'appelles ?", "en": "What's your name?" }, "answers": ["¿Cómo te llamas?"], "distractors": ["estás?", "soy"] },
-        { "id": "es-u1-l2-e6", "type": "translate_to_source", "source": "Soy Lucía.", "answers": { "fr": ["Je suis Lucía."], "en": ["I'm Lucía."] } },
-        { "id": "es-u1-l2-e7", "type": "translate_to_target", "source": { "fr": "Je suis Tomás", "en": "I am Tomás" }, "answers": ["Soy Tomás"], "distractors": ["llamo", "me"] },
-        { "id": "es-u1-l2-e8", "type": "translate_to_source", "source": "Me llamo Ana.", "answers": { "fr": ["Je m'appelle Ana."], "en": ["My name is Ana."] } },
-        { "id": "es-u1-l2-e9", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « el coche » ?", "en": "Which picture matches « el coche »?" }, "options": [{ "id": "a", "emoji": "🚗" }, { "id": "b", "emoji": "🏠" }, { "id": "c", "emoji": "🌳" }], "answer": "a" },
-        { "id": "es-u1-l2-e10", "type": "translate_to_target", "source": { "fr": "Je m'appelle Carmen", "en": "My name is Carmen" }, "answers": ["Me llamo Carmen"], "distractors": ["soy", "adiós"] }
+        {
+          "id": "es-u1-l2-e1",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je m'appelle Lucía",
+            "en": "My name is Lucía"
+          },
+          "answers": ["Me llamo Lucía"],
+          "distractors": ["soy", "estás"]
+        },
+        {
+          "id": "es-u1-l2-e2",
+          "type": "translate_to_source",
+          "source": "¿Cómo te llamas?",
+          "answers": {
+            "fr": ["Comment tu t'appelles ?", "Tu t'appelles comment ?"],
+            "en": ["What is your name?", "What's your name?"]
+          }
+        },
+        {
+          "id": "es-u1-l2-e3",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je m'appelle Mateo",
+            "en": "My name is Mateo"
+          },
+          "answers": ["Me llamo Mateo"],
+          "distractors": ["adiós"]
+        },
+        {
+          "id": "es-u1-l2-e4",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « el gato » ?",
+            "en": "Which picture matches « el gato »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "🐱"
+            },
+            {
+              "id": "b",
+              "emoji": "🐶"
+            },
+            {
+              "id": "c",
+              "emoji": "🐟"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l2-e5",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Comment tu t'appelles ?",
+            "en": "What's your name?"
+          },
+          "answers": ["¿Cómo te llamas?"],
+          "distractors": ["estás?", "soy"]
+        },
+        {
+          "id": "es-u1-l2-e6",
+          "type": "translate_to_source",
+          "source": "Soy Lucía.",
+          "answers": {
+            "fr": ["Je suis Lucía."],
+            "en": ["I'm Lucía."]
+          }
+        },
+        {
+          "id": "es-u1-l2-e7",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je suis Tomás",
+            "en": "I am Tomás"
+          },
+          "answers": ["Soy Tomás"],
+          "distractors": ["llamo", "me"]
+        },
+        {
+          "id": "es-u1-l2-e8",
+          "type": "translate_to_source",
+          "source": "Me llamo Ana.",
+          "answers": {
+            "fr": ["Je m'appelle Ana."],
+            "en": ["My name is Ana."]
+          }
+        },
+        {
+          "id": "es-u1-l2-e9",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « el coche » ?",
+            "en": "Which picture matches « el coche »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "🚗"
+            },
+            {
+              "id": "b",
+              "emoji": "🏠"
+            },
+            {
+              "id": "c",
+              "emoji": "🌳"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l2-e10",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je m'appelle Carmen",
+            "en": "My name is Carmen"
+          },
+          "answers": ["Me llamo Carmen"],
+          "distractors": ["soy", "adiós"]
+        }
       ]
     },
     {
       "id": "es-u1-l3",
-      "title": { "fr": "Comment ça va ?", "en": "How are you?" },
+      "title": {
+        "fr": "Comment ça va ?",
+        "en": "How are you?"
+      },
       "exercises": [
-        { "id": "es-u1-l3-e1", "type": "translate_to_target", "source": { "fr": "Je vais bien", "en": "I'm fine" }, "answers": ["Estoy bien"], "distractors": ["mal", "adiós"] },
-        { "id": "es-u1-l3-e2", "type": "translate_to_source", "source": "Estoy mal.", "answers": { "fr": ["Je ne vais pas bien.", "Je vais mal."], "en": ["I'm not well.", "I'm bad."] } },
-        { "id": "es-u1-l3-e3", "type": "translate_to_target", "source": { "fr": "Comment vas-tu ?", "en": "How are you?" }, "answers": ["¿Cómo estás?"], "distractors": ["bien", "soy"] },
-        { "id": "es-u1-l3-e4", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « estoy triste » ?", "en": "Which picture matches « estoy triste »?" }, "options": [{ "id": "a", "emoji": "😢" }, { "id": "b", "emoji": "😄" }, { "id": "c", "emoji": "😴" }], "answer": "a" },
-        { "id": "es-u1-l3-e5", "type": "translate_to_source", "source": "Muy bien, gracias.", "answers": { "fr": ["Très bien, merci."], "en": ["Very well, thanks."] } },
-        { "id": "es-u1-l3-e6", "type": "translate_to_target", "source": { "fr": "Et toi ?", "en": "And you?" }, "answers": ["¿Y tú?"], "distractors": ["adiós", "muy"] },
-        { "id": "es-u1-l3-e7", "type": "translate_to_target", "source": { "fr": "Comme ci comme ça", "en": "So-so" }, "answers": ["Así así"], "distractors": ["muy", "estás"] },
-        { "id": "es-u1-l3-e8", "type": "translate_to_source", "source": "¿Y tú? Estoy bien.", "answers": { "fr": ["Et toi ? Je vais bien."], "en": ["And you? I'm fine."] } },
-        { "id": "es-u1-l3-e9", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « cansado » ?", "en": "Which picture matches « cansado »?" }, "options": [{ "id": "a", "emoji": "😴" }, { "id": "b", "emoji": "😀" }, { "id": "c", "emoji": "🏃" }], "answer": "a" },
-        { "id": "es-u1-l3-e10", "type": "translate_to_target", "source": { "fr": "Je vais très bien", "en": "I'm very well" }, "answers": ["Estoy muy bien"], "distractors": ["mal", "así"] }
+        {
+          "id": "es-u1-l3-e1",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je vais bien",
+            "en": "I'm fine"
+          },
+          "answers": ["Estoy bien"],
+          "distractors": ["mal", "adiós"]
+        },
+        {
+          "id": "es-u1-l3-e2",
+          "type": "translate_to_source",
+          "source": "Estoy mal.",
+          "answers": {
+            "fr": ["Je ne vais pas bien.", "Je vais mal."],
+            "en": ["I'm not well.", "I'm bad."]
+          }
+        },
+        {
+          "id": "es-u1-l3-e3",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Comment vas-tu ?",
+            "en": "How are you?"
+          },
+          "answers": ["¿Cómo estás?"],
+          "distractors": ["bien", "soy"]
+        },
+        {
+          "id": "es-u1-l3-e4",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « estoy triste » ?",
+            "en": "Which picture matches « estoy triste »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "😢"
+            },
+            {
+              "id": "b",
+              "emoji": "😄"
+            },
+            {
+              "id": "c",
+              "emoji": "😴"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l3-e5",
+          "type": "translate_to_source",
+          "source": "Muy bien, gracias.",
+          "answers": {
+            "fr": ["Très bien, merci."],
+            "en": ["Very well, thanks."]
+          }
+        },
+        {
+          "id": "es-u1-l3-e6",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Et toi ?",
+            "en": "And you?"
+          },
+          "answers": ["¿Y tú?"],
+          "distractors": ["adiós", "muy"]
+        },
+        {
+          "id": "es-u1-l3-e7",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Comme ci comme ça",
+            "en": "So-so"
+          },
+          "answers": ["Así así"],
+          "distractors": ["muy", "estás"]
+        },
+        {
+          "id": "es-u1-l3-e8",
+          "type": "translate_to_source",
+          "source": "¿Y tú? Estoy bien.",
+          "answers": {
+            "fr": ["Et toi ? Je vais bien."],
+            "en": ["And you? I'm fine."]
+          }
+        },
+        {
+          "id": "es-u1-l3-e9",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « cansado » ?",
+            "en": "Which picture matches « cansado »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "😴"
+            },
+            {
+              "id": "b",
+              "emoji": "😀"
+            },
+            {
+              "id": "c",
+              "emoji": "🏃"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l3-e10",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je vais très bien",
+            "en": "I'm very well"
+          },
+          "answers": ["Estoy muy bien"],
+          "distractors": ["mal", "así"]
+        }
       ]
     },
     {
       "id": "es-u1-l4",
-      "title": { "fr": "D'où viens-tu ?", "en": "Where are you from?" },
+      "title": {
+        "fr": "D'où viens-tu ?",
+        "en": "Where are you from?"
+      },
       "exercises": [
-        { "id": "es-u1-l4-e1", "type": "translate_to_target", "source": { "fr": "Je suis espagnol", "en": "I am Spanish" }, "answers": ["Soy español"], "distractors": ["estás", "adiós"] },
-        { "id": "es-u1-l4-e2", "type": "translate_to_source", "source": "¿De dónde eres?", "answers": { "fr": ["D'où es-tu ?", "D'où viens-tu ?"], "en": ["Where are you from?"] } },
-        { "id": "es-u1-l4-e3", "type": "translate_to_target", "source": { "fr": "Je suis de Paris", "en": "I'm from Paris" }, "answers": ["Soy de París"], "distractors": ["estoy", "bien"] },
-        { "id": "es-u1-l4-e4", "type": "image_choice", "prompt": { "fr": "Quel drapeau correspond à « España » ?", "en": "Which flag matches « España »?" }, "options": [{ "id": "a", "emoji": "🇪🇸" }, { "id": "b", "emoji": "🇫🇷" }, { "id": "c", "emoji": "🇮🇹" }], "answer": "a" },
-        { "id": "es-u1-l4-e5", "type": "translate_to_source", "source": "Soy francés.", "answers": { "fr": ["Je suis français."], "en": ["I am French."] } },
-        { "id": "es-u1-l4-e6", "type": "translate_to_target", "source": { "fr": "Je viens du Mexique", "en": "I come from Mexico" }, "answers": ["Vengo de México"], "distractors": ["soy", "estoy"] },
-        { "id": "es-u1-l4-e7", "type": "translate_to_source", "source": "Soy de Madrid.", "answers": { "fr": ["Je suis de Madrid."], "en": ["I'm from Madrid."] } },
-        { "id": "es-u1-l4-e8", "type": "translate_to_target", "source": { "fr": "Je suis de Lyon", "en": "I am from Lyon" }, "answers": ["Soy de Lyon"], "distractors": ["adiós", "hola"] },
-        { "id": "es-u1-l4-e9", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « la ciudad » ?", "en": "Which picture matches « la ciudad »?" }, "options": [{ "id": "a", "emoji": "🏙️" }, { "id": "b", "emoji": "🌲" }, { "id": "c", "emoji": "🏖️" }], "answer": "a" },
-        { "id": "es-u1-l4-e10", "type": "translate_to_source", "source": "Vengo de Argentina.", "answers": { "fr": ["Je viens d'Argentine."], "en": ["I come from Argentina."] } }
+        {
+          "id": "es-u1-l4-e1",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je suis espagnol",
+            "en": "I am Spanish"
+          },
+          "answers": ["Soy español"],
+          "distractors": ["estás", "adiós"]
+        },
+        {
+          "id": "es-u1-l4-e2",
+          "type": "translate_to_source",
+          "source": "¿De dónde eres?",
+          "answers": {
+            "fr": ["D'où es-tu ?", "D'où viens-tu ?"],
+            "en": ["Where are you from?"]
+          }
+        },
+        {
+          "id": "es-u1-l4-e3",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je suis de Paris",
+            "en": "I'm from Paris"
+          },
+          "answers": ["Soy de París"],
+          "distractors": ["estoy", "bien"]
+        },
+        {
+          "id": "es-u1-l4-e4",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quel drapeau correspond à « España » ?",
+            "en": "Which flag matches « España »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "🇪🇸"
+            },
+            {
+              "id": "b",
+              "emoji": "🇫🇷"
+            },
+            {
+              "id": "c",
+              "emoji": "🇮🇹"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l4-e5",
+          "type": "translate_to_source",
+          "source": "Soy francés.",
+          "answers": {
+            "fr": ["Je suis français."],
+            "en": ["I am French."]
+          }
+        },
+        {
+          "id": "es-u1-l4-e6",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je viens du Mexique",
+            "en": "I come from Mexico"
+          },
+          "answers": ["Vengo de México"],
+          "distractors": ["soy", "estoy"]
+        },
+        {
+          "id": "es-u1-l4-e7",
+          "type": "translate_to_source",
+          "source": "Soy de Madrid.",
+          "answers": {
+            "fr": ["Je suis de Madrid."],
+            "en": ["I'm from Madrid."]
+          }
+        },
+        {
+          "id": "es-u1-l4-e8",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je suis de Lyon",
+            "en": "I am from Lyon"
+          },
+          "answers": ["Soy de Lyon"],
+          "distractors": ["adiós", "hola"]
+        },
+        {
+          "id": "es-u1-l4-e9",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « la ciudad » ?",
+            "en": "Which picture matches « la ciudad »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "🏙️"
+            },
+            {
+              "id": "b",
+              "emoji": "🌲"
+            },
+            {
+              "id": "c",
+              "emoji": "🏖️"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l4-e10",
+          "type": "translate_to_source",
+          "source": "Vengo de Argentina.",
+          "answers": {
+            "fr": ["Je viens d'Argentine."],
+            "en": ["I come from Argentina."]
+          }
+        }
       ]
     },
     {
       "id": "es-u1-l5",
-      "title": { "fr": "Révision", "en": "Review" },
+      "title": {
+        "fr": "Révision",
+        "en": "Review"
+      },
       "exercises": [
-        { "id": "es-u1-l5-e1", "type": "translate_to_target", "source": { "fr": "Bonjour (le matin)", "en": "Good morning" }, "answers": ["Buenos días"], "distractors": ["noches", "adiós"] },
-        { "id": "es-u1-l5-e2", "type": "translate_to_source", "source": "Me llamo Lucía. Soy de Madrid.", "answers": { "fr": ["Je m'appelle Lucía. Je suis de Madrid."], "en": ["My name is Lucía. I'm from Madrid."] } },
-        { "id": "es-u1-l5-e3", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « muy mal » ?", "en": "Which picture matches « muy mal »?" }, "options": [{ "id": "a", "emoji": "😫" }, { "id": "b", "emoji": "😄" }, { "id": "c", "emoji": "🥳" }], "answer": "a" },
-        { "id": "es-u1-l5-e4", "type": "translate_to_target", "source": { "fr": "Comment ça va ?", "en": "How's it going?" }, "answers": ["¿Qué tal?"], "distractors": ["llamas?", "soy"] },
-        { "id": "es-u1-l5-e5", "type": "translate_to_source", "source": "Estoy bien, gracias. ¿Y tú?", "answers": { "fr": ["Je vais bien, merci. Et toi ?"], "en": ["I'm fine, thanks. And you?"] } },
-        { "id": "es-u1-l5-e6", "type": "translate_to_target", "source": { "fr": "Bonne nuit", "en": "Good night" }, "answers": ["Buenas noches"], "distractors": ["buenos", "días"] },
-        { "id": "es-u1-l5-e7", "type": "translate_to_target", "source": { "fr": "Je suis de Barcelone", "en": "I'm from Barcelona" }, "answers": ["Soy de Barcelona"], "distractors": ["estoy", "hola"] },
-        { "id": "es-u1-l5-e8", "type": "translate_to_source", "source": "¡Adiós, hasta mañana!", "answers": { "fr": ["Au revoir, à demain !"], "en": ["Goodbye, see you tomorrow!"] } },
-        { "id": "es-u1-l5-e9", "type": "image_choice", "prompt": { "fr": "Quelle image correspond à « hola » ?", "en": "Which picture matches « hola »?" }, "options": [{ "id": "a", "emoji": "👋" }, { "id": "b", "emoji": "😴" }, { "id": "c", "emoji": "🍎" }], "answer": "a" },
-        { "id": "es-u1-l5-e10", "type": "translate_to_target", "source": { "fr": "Je ne vais pas bien", "en": "I'm not well" }, "answers": ["No estoy bien"], "distractors": ["muy", "sí"] }
+        {
+          "id": "es-u1-l5-e1",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Bonjour (le matin)",
+            "en": "Good morning"
+          },
+          "answers": ["Buenos días"],
+          "distractors": ["noches", "adiós"]
+        },
+        {
+          "id": "es-u1-l5-e2",
+          "type": "translate_to_source",
+          "source": "Me llamo Lucía. Soy de Madrid.",
+          "answers": {
+            "fr": ["Je m'appelle Lucía. Je suis de Madrid."],
+            "en": ["My name is Lucía. I'm from Madrid."]
+          }
+        },
+        {
+          "id": "es-u1-l5-e3",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « muy mal » ?",
+            "en": "Which picture matches « muy mal »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "😫"
+            },
+            {
+              "id": "b",
+              "emoji": "😄"
+            },
+            {
+              "id": "c",
+              "emoji": "🥳"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l5-e4",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Comment ça va ?",
+            "en": "How's it going?"
+          },
+          "answers": ["¿Qué tal?"],
+          "distractors": ["llamas?", "soy"]
+        },
+        {
+          "id": "es-u1-l5-e5",
+          "type": "translate_to_source",
+          "source": "Estoy bien, gracias. ¿Y tú?",
+          "answers": {
+            "fr": ["Je vais bien, merci. Et toi ?"],
+            "en": ["I'm fine, thanks. And you?"]
+          }
+        },
+        {
+          "id": "es-u1-l5-e6",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Bonne nuit",
+            "en": "Good night"
+          },
+          "answers": ["Buenas noches"],
+          "distractors": ["buenos", "días"]
+        },
+        {
+          "id": "es-u1-l5-e7",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je suis de Barcelone",
+            "en": "I'm from Barcelona"
+          },
+          "answers": ["Soy de Barcelona"],
+          "distractors": ["estoy", "hola"]
+        },
+        {
+          "id": "es-u1-l5-e8",
+          "type": "translate_to_source",
+          "source": "¡Adiós, hasta mañana!",
+          "answers": {
+            "fr": ["Au revoir, à demain !"],
+            "en": ["Goodbye, see you tomorrow!"]
+          }
+        },
+        {
+          "id": "es-u1-l5-e9",
+          "type": "image_choice",
+          "prompt": {
+            "fr": "Quelle image correspond à « hola » ?",
+            "en": "Which picture matches « hola »?"
+          },
+          "options": [
+            {
+              "id": "a",
+              "emoji": "👋"
+            },
+            {
+              "id": "b",
+              "emoji": "😴"
+            },
+            {
+              "id": "c",
+              "emoji": "🍎"
+            }
+          ],
+          "answer": "a"
+        },
+        {
+          "id": "es-u1-l5-e10",
+          "type": "translate_to_target",
+          "source": {
+            "fr": "Je ne vais pas bien",
+            "en": "I'm not well"
+          },
+          "answers": ["No estoy bien"],
+          "distractors": ["muy", "sí"]
+        }
       ]
     }
   ]

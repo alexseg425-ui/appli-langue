@@ -19,6 +19,7 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   verdict: Verdict | null; // null tant que la réponse n'est pas vérifiée
+  showSpecialChars?: boolean; // false = pas de barre de caractères spéciaux
 }
 
 export function ExerciseView(props: Props) {
@@ -147,11 +148,12 @@ function TypingExercise({
   value,
   onChange,
   verdict,
+  showSpecialChars = true,
 }: Props & { exercise: Extract<Exercise, { type: 'translate_to_source' }> }) {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const disabled = verdict !== null;
-  const specialChars = UI_SPECIAL_CHARS[uiLang] ?? [];
+  const specialChars = showSpecialChars ? (UI_SPECIAL_CHARS[uiLang] ?? []) : [];
 
   return (
     <View style={{ gap: 18 }}>

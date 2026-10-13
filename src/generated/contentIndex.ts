@@ -5,7 +5,7 @@ import file_2 from '../../content/es/units/unit-01-saludos.json';
 import file_3 from '../../content/es/tips/unit-01-saludos.json';
 
 export const RAW_CONTENT = {
-  es: {
+  'es': {
     config: { file: 'config.json', data: file_0 },
     characters: { file: 'characters.json', data: file_1 },
     units: [{ file: 'units/unit-01-saludos.json', data: file_2 }],

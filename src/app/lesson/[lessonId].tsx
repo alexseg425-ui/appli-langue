@@ -179,6 +179,7 @@ export default function LessonScreen() {
             value={draft}
             onChange={setDraft}
             verdict={verdict}
+            showSpecialChars={found.unit.showSpecialChars}
           />
         ) : null}
       </ScrollView>

@@ -101,6 +101,8 @@ export const UnitSchema = z.object({
   cefr: CefrLevel,
   title: LocalizedText,
   description: LocalizedText,
+  // false = pas de barre de caractères spéciaux dans cette unité (ex. parcours débutant)
+  showSpecialChars: z.boolean().default(true),
   lessons: z.array(LessonSchema).min(1),
 });
 

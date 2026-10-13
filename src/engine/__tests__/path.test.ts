@@ -20,6 +20,7 @@ const units: Unit[] = [
     cefr: 'A1',
     title: { fr: 'U1', en: 'U1' },
     description: { fr: '', en: '' },
+    showSpecialChars: true,
     lessons: [
       {
         id: 'l1',
@@ -39,6 +40,7 @@ const units: Unit[] = [
     cefr: 'A1',
     title: { fr: 'U2', en: 'U2' },
     description: { fr: '', en: '' },
+    showSpecialChars: true,
     lessons: [
       {
         id: 'l3',

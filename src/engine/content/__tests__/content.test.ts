@@ -1,5 +1,6 @@
 import { RAW_CONTENT } from '../../../generated/contentIndex';
 import { buildLanguageContent } from '../buildLanguageContent';
+import { UnitSchema } from '../schema';
 
 describe("contenu réel de l'app", () => {
   it("l'espagnol est valide", () => {
@@ -51,5 +52,18 @@ describe('détection des erreurs dans le contenu', () => {
     const { issues: wrongFolder } = buildLanguageContent('it', RAW_CONTENT.es);
     expect(issues).toEqual([]);
     expect(wrongFolder.some((i) => i.message.includes('ne correspond pas'))).toBe(true);
+  });
+});
+
+describe('barre de caractères spéciaux', () => {
+  it("le parcours 1 de l'espagnol ne l'affiche pas", () => {
+    const { content } = buildLanguageContent('es', RAW_CONTENT.es);
+    expect(content!.units[0]?.showSpecialChars).toBe(false);
+  });
+
+  it("elle est affichée par défaut quand l'unité ne précise rien", () => {
+    const unit = JSON.parse(JSON.stringify(RAW_CONTENT.es.units[0]!.data));
+    delete unit.showSpecialChars;
+    expect(UnitSchema.parse(unit).showSpecialChars).toBe(true);
   });
 });
