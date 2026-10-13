@@ -82,6 +82,8 @@
     "alreadyLearned": "Déjà langue apprise",
     "version": "Version de développement",
     "sounds": "Effets sonores",
-    "soundsHint": "Sons de bonne réponse, d'erreur et de fin de leçon."
+    "soundsHint": "Sons de bonne réponse, d'erreur et de fin de leçon.",
+    "music": "Musique du chemin",
+    "musicHint": "Une musique douce pendant que tu avances dans la langue."
   }
 }

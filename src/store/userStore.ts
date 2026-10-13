@@ -15,6 +15,8 @@ interface UserState {
   onboardingDone: boolean;
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
+  musicEnabled: boolean;
+  setMusicEnabled: (enabled: boolean) => void;
   setInterfaceLanguage: (code: InterfaceLanguageCode) => void;
   setThemePreference: (preference: ThemePreference) => void;
   setActiveLanguage: (code: string) => void;
@@ -31,6 +33,8 @@ export const useUserStore = create<UserState>()(
       onboardingDone: false,
       soundEnabled: true,
       setSoundEnabled: (enabled) => set({ soundEnabled: enabled }),
+      musicEnabled: true,
+      setMusicEnabled: (enabled) => set({ musicEnabled: enabled }),
       setInterfaceLanguage: (code) => set({ interfaceLanguage: code }),
       setThemePreference: (preference) => set({ themePreference: preference }),
       setActiveLanguage: (code) => set({ activeLanguage: code }),

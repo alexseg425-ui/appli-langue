@@ -1,6 +1,7 @@
 // Réglages : langue de l'interface (changement immédiat) et thème.
-import { ScrollView, StyleSheet, Pressable, Switch, Text, View } from 'react-native';
+import { Platform, ScrollView, StyleSheet, Pressable, Switch, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { stopPathMusic } from '../../audio/sounds';
 import { canPair } from '../../engine/languagePair';
 import { resolveInterfaceLanguage } from '../../i18n/detect';
 import { INTERFACE_LANGUAGES, InterfaceLanguageCode } from '../../i18n/languages';
@@ -20,6 +21,8 @@ export default function SettingsScreen() {
   const setInterfaceLanguage = useUserStore((state) => state.setInterfaceLanguage);
   const soundEnabled = useUserStore((state) => state.soundEnabled);
   const setSoundEnabled = useUserStore((state) => state.setSoundEnabled);
+  const musicEnabled = useUserStore((state) => state.musicEnabled);
+  const setMusicEnabled = useUserStore((state) => state.setMusicEnabled);
   const themePreference = useUserStore((state) => state.themePreference);
   const setThemePreference = useUserStore((state) => state.setThemePreference);
 
@@ -58,23 +61,23 @@ export default function SettingsScreen() {
           />
         </View>
 
-        <View
-          style={[styles.soundRow, { backgroundColor: colors.surface, borderColor: colors.border }]}
-        >
-          <View style={{ flex: 1 }}>
-            <Text style={[styles.sectionTitle, { color: colors.text }]}>
-              {t('settings.sounds')}
-            </Text>
-            <Text style={{ color: colors.textMuted }}>{t('settings.soundsHint')}</Text>
-          </View>
-          <Switch
-            value={soundEnabled}
-            onValueChange={setSoundEnabled}
-            trackColor={{ false: colors.border, true: colors.accent }}
-            thumbColor={colors.onColor}
-            accessibilityLabel={t('settings.sounds')}
-          />
-        </View>
+        <ToggleRow
+          title={t('settings.sounds')}
+          hint={t('settings.soundsHint')}
+          value={soundEnabled}
+          onChange={setSoundEnabled}
+        />
+
+        <ToggleRow
+          title={t('settings.music')}
+          hint={t('settings.musicHint')}
+          value={musicEnabled}
+          onChange={(enabled) => {
+            setMusicEnabled(enabled);
+            // Réglages ouverts : la musique du chemin ne joue pas, on coupe donc net si elle tournait.
+            if (!enabled) stopPathMusic();
+          }}
+        />
 
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>{t('settings.theme')}</Text>
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 26, fontWeight: '800' },
   section: { gap: 10 },
   sectionTitle: { fontSize: 18, fontWeight: '800' },
-  soundRow: {
+  toggleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
@@ -130,3 +133,37 @@ const styles = StyleSheet.create({
   segmented: { flexDirection: 'row', gap: 8 },
   segment: { flex: 1, alignItems: 'center', paddingVertical: 12, borderRadius: 14, borderWidth: 2 },
 });
+
+// Une ligne "titre + explication + interrupteur", utilisée pour les sons et la musique.
+function ToggleRow({
+  title,
+  hint,
+  value,
+  onChange,
+}: {
+  title: string;
+  hint: string;
+  value: boolean;
+  onChange: (value: boolean) => void;
+}) {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[styles.toggleRow, { backgroundColor: colors.surface, borderColor: colors.border }]}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>{title}</Text>
+        <Text style={{ color: colors.textMuted }}>{hint}</Text>
+      </View>
+      <Switch
+        value={value}
+        onValueChange={onChange}
+        trackColor={{ false: colors.border, true: colors.accentStrong }}
+        thumbColor={colors.onColor}
+        // Sur le web, le bouton activé garde la couleur de la palette (il a sa propre couleur par défaut).
+        {...(Platform.OS === 'web' ? { activeThumbColor: colors.onColor } : {})}
+        accessibilityLabel={title}
+      />
+    </View>
+  );
+}

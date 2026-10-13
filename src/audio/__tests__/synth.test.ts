@@ -1,12 +1,12 @@
 import { encodeWav, SAMPLE_RATE, SOUND_NAMES, synthesize, toBase64 } from '../synth';
 
 describe('effets sonores', () => {
-  it('chaque son existe, dure entre 0,05 s et 1 s et reste dans les bornes', () => {
+  it('chaque son existe, dure entre 0,05 s et 2,5 s et atteint le même volume maximum', () => {
     for (const name of SOUND_NAMES) {
       const samples = synthesize(name);
       const seconds = samples.length / SAMPLE_RATE;
       expect(seconds).toBeGreaterThan(0.05);
-      expect(seconds).toBeLessThan(1);
+      expect(seconds).toBeLessThan(2.5);
       const peak = Math.max(...samples.map((value) => Math.abs(value)));
       expect(peak).toBeCloseTo(0.9, 2);
     }
@@ -14,6 +14,12 @@ describe('effets sonores', () => {
 
   it("le son d'erreur est plus long que le clic", () => {
     expect(synthesize('wrong').length).toBeGreaterThan(synthesize('tap').length);
+  });
+
+  it('chaque son est reproductible : même entrée, même résultat', () => {
+    expect(Array.from(synthesize('complete').slice(0, 500))).toEqual(
+      Array.from(synthesize('complete').slice(0, 500)),
+    );
   });
 });
 

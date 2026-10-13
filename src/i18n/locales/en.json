@@ -82,6 +82,8 @@
     "alreadyLearned": "Already the language you learn",
     "version": "Development build",
     "sounds": "Sound effects",
-    "soundsHint": "Sounds for correct answers, mistakes and the end of a lesson."
+    "soundsHint": "Sounds for correct answers, mistakes and the end of a lesson.",
+    "music": "Path music",
+    "musicHint": "Soft music while you progress in the language."
   }
 }

@@ -1,8 +1,8 @@
 // Écran d'accueil : le chemin vertical des unités et des leçons.
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import Animated, {
   useAnimatedStyle,
@@ -11,7 +11,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { playSound } from '../../audio/sounds';
+import { playSound, startPathMusic, stopPathMusic } from '../../audio/sounds';
 import { getLanguageContent } from '../../engine/content/registry';
 import { buildPath, PathLesson, PathUnit, unitTitle } from '../../engine/path/pathBuilder';
 import { resolveInterfaceLanguage } from '../../i18n/detect';
@@ -36,6 +36,14 @@ export default function PathScreen() {
   const hearts = useProgressStore((state) => state.hearts);
   const courses = useProgressStore((state) => state.courses);
   const syncHearts = useProgressStore((state) => state.syncHearts);
+
+  // La musique joue tant que le chemin est affiché : elle s'arrête quand on ouvre une leçon.
+  useFocusEffect(
+    useCallback(() => {
+      startPathMusic();
+      return () => stopPathMusic();
+    }, []),
+  );
 
   // Les cœurs se rechargent avec le temps : on vérifie à l'ouverture, puis toutes les 30 s.
   useEffect(() => {

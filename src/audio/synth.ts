@@ -1,7 +1,8 @@
-// Fabrique les effets sonores directement à partir de formes d'onde (sinus, triangle, carré).
-// Pourquoi ? Les sons sont ainsi originaux, sans fichier sous licence à vérifier.
-// Un son = une liste de "notes" : chaque note a une onde, une fréquence qui peut glisser
-// (de "from" à "to") et une enveloppe qui s'éteint en douceur.
+// Effets sonores de l'app, fabriqués avec les instruments de src/audio/instruments.ts.
+// Chaque effet est une liste de notes (instrument, moment, hauteur, volume).
+import { NoteEvent, normalizePeak, renderEvents, SAMPLE_RATE } from './instruments';
+
+export { SAMPLE_RATE };
 
 export const SOUND_NAMES = [
   'tap',
@@ -15,99 +16,52 @@ export const SOUND_NAMES = [
 
 export type SoundName = (typeof SOUND_NAMES)[number];
 
-export const SAMPLE_RATE = 22050;
+// Fréquence d'une note MIDI (69 = la 440 Hz ; 72 = do 5 ; 84 = do 6…).
+const hz = (midi: number): number => 440 * 2 ** ((midi - 69) / 12);
 
-type Wave = 'sine' | 'triangle' | 'square';
-
-interface Tone {
-  start: number; // début, en secondes
-  duration: number; // durée, en secondes
-  from: number; // fréquence de départ (Hz)
-  to?: number; // fréquence de fin (Hz) ; absent = fréquence constante
-  wave: Wave;
-  gain: number; // volume de la note (0 à 1)
-}
-
-const RECIPES: Record<SoundName, Tone[]> = {
-  // Petit "clic" court, quand on touche un bouton ou une tuile.
-  tap: [{ start: 0, duration: 0.06, from: 900, to: 600, wave: 'sine', gain: 0.5 }],
-  // Deux notes qui montent : bonne réponse.
+const RECIPES: Record<SoundName, NoteEvent[]> = {
+  // Petit "tac" de bois, quand on touche un bouton ou une tuile.
+  tap: [{ instrument: 'marimba', at: 0, dur: 0.12, freq: hz(84), gain: 0.5 }],
+  // Carillon : deux cloches qui sonnent l'une après l'autre.
   correct: [
-    { start: 0, duration: 0.14, from: 1047, wave: 'triangle', gain: 0.6 },
-    { start: 0.09, duration: 0.3, from: 1319, wave: 'triangle', gain: 0.6 },
+    { instrument: 'bell', at: 0, dur: 0.9, freq: hz(84), gain: 0.55 },
+    { instrument: 'bell', at: 0.09, dur: 1.1, freq: hz(88), gain: 0.55 },
   ],
-  // Deux notes douces qui descendent : "presque".
+  // Deux pincements doux qui descendent : "presque".
   almost: [
-    { start: 0, duration: 0.14, from: 784, wave: 'sine', gain: 0.5 },
-    { start: 0.12, duration: 0.25, from: 659, wave: 'sine', gain: 0.5 },
+    { instrument: 'pluck', at: 0, dur: 0.5, freq: hz(79), gain: 0.6 },
+    { instrument: 'pluck', at: 0.12, dur: 0.6, freq: hz(76), gain: 0.6 },
   ],
-  // Bourdonnement qui descend : mauvaise réponse.
-  wrong: [{ start: 0, duration: 0.35, from: 260, to: 170, wave: 'square', gain: 0.25 }],
-  // Arpège rapide : combo activé.
-  combo: [523, 659, 784, 1047].map((freq, index) => ({
-    start: index * 0.06,
-    duration: 0.16,
-    from: freq,
-    wave: 'triangle' as const,
-    gain: 0.5,
+  // Deux notes graves de marimba : une erreur, sans agressivité.
+  wrong: [
+    { instrument: 'marimba', at: 0, dur: 0.35, freq: hz(50), gain: 0.7 },
+    { instrument: 'marimba', at: 0.12, dur: 0.4, freq: hz(45), gain: 0.6 },
+  ],
+  // Arpège de cordes pincées : combo activé.
+  combo: [72, 76, 79, 84].map((midi, index) => ({
+    instrument: 'pluck' as const,
+    at: index * 0.07,
+    dur: 0.45,
+    freq: hz(midi),
+    gain: 0.55,
   })),
-  // Petite fanfare : leçon terminée.
+  // Accord de cloches qui s'élargit : leçon terminée.
   complete: [
-    { start: 0, duration: 0.12, from: 523, wave: 'triangle', gain: 0.55 },
-    { start: 0.12, duration: 0.12, from: 659, wave: 'triangle', gain: 0.55 },
-    { start: 0.24, duration: 0.12, from: 784, wave: 'triangle', gain: 0.55 },
-    { start: 0.36, duration: 0.6, from: 1047, wave: 'triangle', gain: 0.6 },
+    { instrument: 'bell', at: 0, dur: 1.2, freq: hz(72), gain: 0.5 },
+    { instrument: 'bell', at: 0.1, dur: 1.2, freq: hz(76), gain: 0.5 },
+    { instrument: 'bell', at: 0.2, dur: 1.2, freq: hz(79), gain: 0.5 },
+    { instrument: 'bell', at: 0.36, dur: 1.8, freq: hz(84), gain: 0.6 },
   ],
-  // Glissando triste : plus de cœurs.
-  heartLost: [{ start: 0, duration: 0.45, from: 520, to: 220, wave: 'sine', gain: 0.5 }],
+  // Glissando lent et mélancolique : plus de cœurs.
+  heartLost: [{ instrument: 'glide', at: 0, dur: 0.7, freq: hz(72), to: hz(60), gain: 0.5 }],
 };
 
-function waveValue(kind: Wave, phase: number): number {
-  switch (kind) {
-    case 'sine':
-      return Math.sin(phase);
-    case 'triangle':
-      return (2 / Math.PI) * Math.asin(Math.sin(phase));
-    case 'square':
-      return Math.sign(Math.sin(phase)) * 0.6; // carré adouci pour ne pas agresser l'oreille
-  }
-}
-
-// Calcule les échantillons (valeurs entre -1 et 1) d'un son.
+// Fabrique les échantillons (valeurs entre -1 et 1) d'un effet sonore.
 export function synthesize(name: SoundName, sampleRate = SAMPLE_RATE): Float32Array {
-  const tones = RECIPES[name];
-  const end = Math.max(...tones.map((tone) => tone.start + tone.duration));
-  const samples = new Float32Array(Math.ceil((end + 0.02) * sampleRate));
-
-  for (const tone of tones) {
-    const first = Math.round(tone.start * sampleRate);
-    const count = Math.round(tone.duration * sampleRate);
-    const target = tone.to ?? tone.from;
-    let phase = 0;
-
-    for (let i = 0; i < count; i++) {
-      const index = first + i;
-      if (index >= samples.length) break;
-
-      const progress = i / count;
-      const frequency = tone.from + (target - tone.from) * progress;
-      phase += (2 * Math.PI * frequency) / sampleRate;
-
-      // Attaque très courte, puis extinction progressive.
-      const attack = Math.min(1, i / (0.006 * sampleRate));
-      const decay = Math.exp(-4 * progress);
-      samples[index] =
-        (samples[index] ?? 0) + waveValue(tone.wave, phase) * attack * decay * tone.gain;
-    }
-  }
-
-  // Ramène le son au même volume maximum, quel que soit le réglage des notes.
-  let peak = 0;
-  for (const sample of samples) peak = Math.max(peak, Math.abs(sample));
-  if (peak > 0) {
-    for (let i = 0; i < samples.length; i++) samples[i] = ((samples[i] ?? 0) / peak) * 0.9;
-  }
-  return samples;
+  const events = RECIPES[name];
+  const end = Math.max(...events.map((event) => event.at + event.dur));
+  const length = Math.ceil((end + 0.05) * sampleRate);
+  return normalizePeak(renderEvents(events, length, sampleRate), 0.9);
 }
 
 // Écrit les échantillons dans un fichier WAV (PCM 16 bits, mono).
