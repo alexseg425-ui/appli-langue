@@ -30,7 +30,8 @@ function sourceFor(name: SoundName): AudioSource {
 // seul le réglage "Sons" de l'app compte.
 export async function initAudio(): Promise<void> {
   try {
-    await setAudioModeAsync({ playsInSilentMode: true });
+    // Les effets se mélangent à la musique de l'utilisateur (elle ne s'arrête pas).
+    await setAudioModeAsync({ playsInSilentMode: true, interruptionMode: 'mixWithOthers' });
   } catch {
     // Sans audio, l'app fonctionne quand même.
   }
@@ -45,7 +46,13 @@ export function playSound(name: SoundName): void {
     players[name] = player;
 
     // On repart du début : le son peut être joué plusieurs fois de suite (ex. tuiles).
-    const start = () => player.play();
+    const start = () => {
+      try {
+        player.play();
+      } catch {
+        // Son ignoré si le téléphone refuse la lecture.
+      }
+    };
     void player.seekTo(0).then(start, start);
   } catch {
     // Un son qui ne joue pas ne doit jamais bloquer l'app.

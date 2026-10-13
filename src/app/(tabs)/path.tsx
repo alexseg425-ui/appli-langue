@@ -52,7 +52,7 @@ export default function PathScreen() {
     <Screen>
       <ScrollView contentContainerStyle={styles.content}>
         <LinearGradient
-          colors={[colors.accent, colors.accentShadow]}
+          colors={[colors.accentStrong, colors.accentDeep]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.hero}
@@ -66,7 +66,7 @@ export default function PathScreen() {
               {t('path.xp', { count: totalXp })}
             </Text>
           </View>
-          <View style={styles.heartPill}>
+          <View style={[styles.heartPill, { backgroundColor: colors.surface }]}>
             <Hearts count={hearts} />
           </View>
         </LinearGradient>
@@ -134,7 +134,7 @@ function UnitBlock({
 
   return (
     <View style={[styles.unit, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-      <Text style={[styles.unitLabel, { color: colors.accent }]}>
+      <Text style={[styles.unitLabel, { color: colors.accentStrong }]}>
         {t('path.unit', { number: unit.order })} · {unit.cefr}
       </Text>
       <Text style={[styles.unitTitle, { color: colors.text }]}>{title}</Text>
@@ -153,9 +153,15 @@ function UnitBlock({
         ))}
       </View>
 
-      <View style={[styles.chest, { opacity: unit.chestUnlocked ? 1 : 0.5 }]}>
-        <Text style={{ fontSize: 28 }}>🎁</Text>
-        <Text style={{ color: colors.text, fontWeight: '700', flex: 1 }}>
+      <View style={styles.chest}>
+        <Text style={{ fontSize: 28, opacity: unit.chestUnlocked ? 1 : 0.5 }}>🎁</Text>
+        <Text
+          style={{
+            color: unit.chestUnlocked ? colors.text : colors.textMuted,
+            fontWeight: '700',
+            flex: 1,
+          }}
+        >
           {unit.chestUnlocked
             ? t('path.chestOpen')
             : `${t('path.chest')} · ${t('path.chestLocked')}`}
@@ -200,8 +206,8 @@ function LessonNode({
   const pulse = usePulse(lesson.status === 'available');
   const shifted = index % 2 === 1;
   const gradient: [string, string] = done
-    ? [colors.correct, '#1D8A4E']
-    : [colors.accent, colors.accentShadow];
+    ? [colors.correctStrong, colors.correctDeep]
+    : [colors.accentStrong, colors.accentDeep];
 
   return (
     <Pressable
@@ -257,7 +263,7 @@ const styles = StyleSheet.create({
   },
   mascotBubble: { backgroundColor: '#FFFFFF', borderRadius: 40, padding: 4 },
   heroTitle: { fontSize: 22, fontWeight: '800' },
-  heroXp: { fontSize: 15, fontWeight: '700', opacity: 0.9 },
+  heroXp: { fontSize: 15, fontWeight: '700' },
   heartPill: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,

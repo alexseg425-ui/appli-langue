@@ -90,7 +90,7 @@ export default function SettingsScreen() {
                   style={[
                     styles.segment,
                     {
-                      backgroundColor: selected ? colors.accent : colors.surface,
+                      backgroundColor: selected ? colors.accentStrong : colors.surface,
                       borderColor: colors.border,
                     },
                   ]}

@@ -1,6 +1,6 @@
 // Écran de leçon : une question à la fois, vérification, cœurs, XP et combo.
 import * as Haptics from 'expo-haptics';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Alert, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { ZoomIn } from 'react-native-reanimated';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -56,6 +56,7 @@ export default function LessonScreen() {
   );
   const [draft, setDraft] = useState('');
   const [now, setNow] = useState(() => Date.now());
+  const finishing = useRef(false); // évite un double appui sur Terminer (XP comptées une seule fois)
 
   // Plus de cœurs : on ouvre la fenêtre d'attente. Elle se ferme dès qu'un cœur revient.
   const noHearts = hearts === 0;
@@ -116,7 +117,10 @@ export default function LessonScreen() {
     const next = recordVerdict(state, result);
     // Le combo a sa propre musique ; sinon on joue le son de la réponse.
     if (next.comboJustReached) playSound('combo');
-    else playSound(result === 'correct' ? 'correct' : result === 'almost' ? 'almost' : 'wrong');
+    else if (!(result === 'wrong' && hearts === 1)) {
+      // Dernière vie perdue : c'est le son "cœurs épuisés" qui s'entend, pas celui de l'erreur.
+      playSound(result === 'correct' ? 'correct' : result === 'almost' ? 'almost' : 'wrong');
+    }
     setState(next);
   };
 
@@ -128,6 +132,8 @@ export default function LessonScreen() {
       setDraft('');
       return;
     }
+    if (finishing.current) return;
+    finishing.current = true;
     const result = lessonResult(next);
     playSound('complete');
     completeLesson(activeLanguage, found.lesson.id, result.perfect, result.xp);
@@ -196,9 +202,10 @@ export default function LessonScreen() {
             label={isLast ? t('lesson.end') : t('lesson.next')}
             onPress={onNext}
             variant={verdict === 'wrong' ? 'secondary' : 'correct'}
+            silent={isLast}
           />
         ) : (
-          <Button3D label={t('lesson.check')} onPress={onCheck} disabled={!draft.trim()} />
+          <Button3D label={t('lesson.check')} onPress={onCheck} disabled={!draft.trim()} silent />
         )}
 
         <Pressable

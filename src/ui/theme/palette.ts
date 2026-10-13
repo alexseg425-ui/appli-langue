@@ -8,6 +8,8 @@ export const palettes = {
     border: '#EBDCC8',
     primary: '#FF8A3D', // couleur d'accent (remplacée par la couleur de la langue)
     correct: '#2FB86E',
+    correctStrong: '#1F8A52', // vert assez foncé pour du texte blanc lisible
+    correctDeep: '#14653A',
     almost: '#F2B233',
     wrong: '#EF5350',
     locked: '#D9CFC4',
@@ -22,6 +24,8 @@ export const palettes = {
     border: '#4A3C2E',
     primary: '#FF9B57',
     correct: '#3FCB80',
+    correctStrong: '#1F8A52',
+    correctDeep: '#14653A',
     almost: '#F5BE4F',
     wrong: '#FF6B68',
     locked: '#4A4038',

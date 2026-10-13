@@ -12,10 +12,11 @@ interface Props {
   onPress: () => void;
   variant?: Variant;
   disabled?: boolean;
+  silent?: boolean; // true = pas de son "tap" (le bouton déclenche déjà son propre son)
   style?: ViewStyle;
 }
 
-export function Button3D({ label, onPress, variant = 'primary', disabled, style }: Props) {
+export function Button3D({ label, onPress, variant = 'primary', disabled, silent, style }: Props) {
   const { colors } = useTheme();
   const [isPressed, setIsPressed] = useState(false);
   const scale = useSharedValue(1);
@@ -26,14 +27,14 @@ export function Button3D({ label, onPress, variant = 'primary', disabled, style 
   const pressStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
   const look = {
-    primary: { background: colors.accent, shadow: colors.accentShadow, text: colors.onColor },
-    correct: { background: colors.correct, shadow: '#1D8A4E', text: colors.onColor },
+    primary: { background: colors.accentStrong, shadow: colors.accentDeep, text: colors.onColor },
+    correct: { background: colors.correctStrong, shadow: colors.correctDeep, text: colors.onColor },
     secondary: { background: colors.surface, shadow: colors.border, text: colors.text },
   }[variant];
 
   const handlePress = () => {
     if (disabled) return;
-    playSound('tap');
+    if (!silent) playSound('tap');
     onPress();
   };
 
@@ -57,7 +58,7 @@ export function Button3D({ label, onPress, variant = 'primary', disabled, style 
           },
         ]}
       >
-        <Text style={[styles.label, { color: look.text }]}>{label}</Text>
+        <Text style={[styles.label, { color: disabled ? colors.text : look.text }]}>{label}</Text>
       </Pressable>
     </Animated.View>
   );

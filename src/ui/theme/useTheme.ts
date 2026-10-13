@@ -18,6 +18,8 @@ export function darken(hex: string, amount: number): string {
 export interface ThemeColors extends Palette {
   accent: string;
   accentShadow: string;
+  accentStrong: string; // accent foncé : fond des boutons et texte d'accent (contraste suffisant)
+  accentDeep: string; // ombre des boutons
 }
 
 export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
@@ -31,7 +33,14 @@ export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
     : palettes[scheme].primary;
 
   const colors = useMemo<ThemeColors>(
-    () => ({ ...palettes[scheme], primary: accent, accent, accentShadow: darken(accent, 0.3) }),
+    () => ({
+      ...palettes[scheme],
+      primary: accent,
+      accent,
+      accentShadow: darken(accent, 0.3),
+      accentStrong: darken(accent, 0.3),
+      accentDeep: darken(accent, 0.5),
+    }),
     [scheme, accent],
   );
 
